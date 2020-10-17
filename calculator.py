@@ -2,7 +2,6 @@ import re  # 处理字符串的模块，如查找特定字符，删除特定字�
 import tkinter  # Tkinter模块("Tk 接口")是Python的标准Tk GUI工具包的接口，位Python的内置模块，直接import tkinter即可使用。
 import tkinter.messagebox  # 调用tkinter模块中的messagebox函数，这个是消息框，对话框的关键，会弹出一个小框
 import pickle
-from tkinter import ttk
 
 # 按钮操作，点击按钮后需要做的处理
 def buttonClik(btn):
@@ -75,50 +74,177 @@ btnCompute.place(x=100, y=40, width=40, height=20)
 def caluli():
     def f1():
         caluli_need.set(height.get() * 30)
-        caluli_eat.set(mifan.get() * 210 + mantou.get() * 280 + shuijiao.get() * 42)  #######################
+        caluli_eat.set(zaocan.get() + wucan.get() + wancan.get())  #######################
     # 定义长在窗口上的窗口
     window_sign_up = tkinter.Toplevel(root)
     window_sign_up.geometry('450x300')
     window_sign_up.title('卡路里计算器')
 
     height = tkinter.IntVar()  # 将输入的注册名赋值给变量
-    height.set(1)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='体重(kg): ').place(x=10, y=10)  # 将`User name:`放置在坐标（10,10）。
+    height.set(0)  # 将最初显示定为'example@python.com'
+    tkinter.Label(window_sign_up, text='体重(kg): ').place(x=25, y=10)  # 将`User name:`放置在坐标（10,10）。
     entry_height = tkinter.Entry(window_sign_up, textvariable=height)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_height.place(x=130, y=10)  # `entry`放置在坐标（150,10）.
+    
+    
     def f3():
         window_sign_up2 = tkinter.Toplevel(window_sign_up)
-        mantou2 = tkinter.IntVar()  # 将输入的注册名赋值给变量
-        mantou2.set(0)  # 将最初显示定为'example@python.com'
-        tkinter.Label(window_sign_up2, text='馒头: ').place(x=10, y=10)  # 将`User name:`放置在坐标（10,10）。
-        entry_mantou = tkinter.Entry(window_sign_up2, textvariable=mantou)  # 创建一个注册名的`entry`，变量为`new_name`
-        entry_mantou.place(x=40, y=10)  # `entry`放置在坐标（150,10）
+        window_sign_up2.geometry('200x250')
+        window_sign_up2.title('早餐')
+        
+        sb = tkinter.Scrollbar(window_sign_up2)
+        sb.pack(side = tkinter.RIGHT, fill = tkinter.Y)
+        lb = tkinter.Listbox(window_sign_up2, height = 8, yscrollcommand = sb.set)
+        lb.pack(side = tkinter.LEFT, fill = tkinter.BOTH)
+        
+        for item in[mantou, mifan, shuijiao, dousha, xianrou]:
+        
+        mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mantou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='馒头(个): ').place(x=10, y=10)  # 将`User name:`放置在坐标（10,10）。
+        entry_mantou = tkinter.Entry(window_sign_up2, textvariable=mantou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mantou.place(x=80, y=10)  # `entry`放置在坐标（150,10）
+        
+        mifan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mifan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='米饭(小碗): ').place(x=10, y=30)  # 将`User name:`放置在坐标（10,10）。
+        entry_mifan = tkinter.Entry(window_sign_up2, textvariable=mifan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mifan.place(x=80, y=30)  # `entry`放置在坐标（150,10）
+        
+        shuijiao = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        shuijiao.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='水饺(个)：').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
+        entry_shuijiao = tkinter.Entry(window_sign_up2, textvariable=shuijiao, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_shuijiao.place(x=80, y=50)  # `entry`放置在坐标（150,10）
+        
+        dousha = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        dousha.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='豆沙包(个)：').place(x=10, y=70)  # 将`User name:`放置在坐标（10,10）。
+        entry_dousha = tkinter.Entry(window_sign_up2, textvariable=dousha, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_dousha.place(x=80, y=70)  # `entry`放置在坐标（150,10）
+        
+        xianrou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        xianrou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='鲜肉包(个)：').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
+        entry_xianrou = tkinter.Entry(window_sign_up2, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
+        
         def f4():
-            mantou.set(entry_mantou.get())
-        mantou.set(entry_mantou.get())
-        btn_comfirm_sign_up2 = tkinter.Button(window_sign_up2, text='计算', command=f4)
-        btn_comfirm_sign_up2.place(x=80, y=80)
+            zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225) ############要改的部分
+        #zaocan.set(entry_mantou.get())
+        btn_comfirm_sign_up2 = tkinter.Button(window_sign_up2, text='确定', command=f4)
+        btn_comfirm_sign_up2.place(x=80, y=180)
     btnCompute2 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f3)
     btnCompute2.place(x=270, y=50, width=20, height=20)
 
-    mifan = tkinter.IntVar()  # 将输入的注册名赋值给变量
-    mifan.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='米饭: ').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
-    entry_mifan = tkinter.Entry(window_sign_up, textvariable=mifan)  # 创建一个注册名的`entry`，变量为`new_name`
-    entry_mifan.place(x=130, y=50)  # `entry`放置在坐标（150,10）.
+    def f5():
+        window_sign_up3 = tkinter.Toplevel(window_sign_up)
+        window_sign_up3.geometry('200x250')
+        window_sign_up3.title('午餐')
+        
+        mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mantou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='馒头(个): ').place(x=10, y=10)  # 将`User name:`放置在坐标（10,10）。
+        entry_mantou = tkinter.Entry(window_sign_up3, textvariable=mantou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mantou.place(x=80, y=10)  # `entry`放置在坐标（150,10）
+        
+        mifan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mifan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='米饭(小碗): ').place(x=10, y=30)  # 将`User name:`放置在坐标（10,10）。
+        entry_mifan = tkinter.Entry(window_sign_up3, textvariable=mifan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mifan.place(x=80, y=30)  # `entry`放置在坐标（150,10）
+        
+        shuijiao = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        shuijiao.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='水饺(个)：').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
+        entry_shuijiao = tkinter.Entry(window_sign_up3, textvariable=shuijiao, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_shuijiao.place(x=80, y=50)  # `entry`放置在坐标（150,10）
+        
+        dousha = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        dousha.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='豆沙包(个)：').place(x=10, y=70)  # 将`User name:`放置在坐标（10,10）。
+        entry_dousha = tkinter.Entry(window_sign_up3, textvariable=dousha, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_dousha.place(x=80, y=70)  # `entry`放置在坐标（150,10）
+        
+        xianrou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        xianrou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='鲜肉包(个)：').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
+        entry_xianrou = tkinter.Entry(window_sign_up3, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
+        
+        def f6():
+            wucan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225)
+        btn_comfirm_sign_up3 = tkinter.Button(window_sign_up3, text='确定', command=f6)
+        btn_comfirm_sign_up3.place(x=80, y=180)
+    btnCompute3 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f5)
+    btnCompute3.place(x=270, y=90, width=20, height=20)   
 
 
-    mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
-    mantou.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='馒头: ').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
-    entry_mantou2 = tkinter.Entry(window_sign_up, textvariable=mantou)  # 创建一个注册名的`entry`，变量为`new_name`
-    entry_mantou2.place(x=130, y=90)  # `entry`放置在坐标（150,10）.
+    def f7():
+        window_sign_up4 = tkinter.Toplevel(window_sign_up)
+        window_sign_up4.geometry('200x250')
+        window_sign_up4.title('晚餐')
+        
+        mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mantou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='馒头(个): ').place(x=10, y=10)  # 将`User name:`放置在坐标（10,10）。
+        entry_mantou = tkinter.Entry(window_sign_up4, textvariable=mantou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mantou.place(x=80, y=10)  # `entry`放置在坐标（150,10）
+        
+        mifan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        mifan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='米饭(小碗): ').place(x=10, y=30)  # 将`User name:`放置在坐标（10,10）。
+        entry_mifan = tkinter.Entry(window_sign_up4, textvariable=mifan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_mifan.place(x=80, y=30)  # `entry`放置在坐标（150,10）
+        
+        shuijiao = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        shuijiao.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='水饺(个)：').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
+        entry_shuijiao = tkinter.Entry(window_sign_up4, textvariable=shuijiao, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_shuijiao.place(x=80, y=50)  # `entry`放置在坐标（150,10）
+        
+        dousha = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        dousha.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='豆沙包(个)：').place(x=10, y=70)  # 将`User name:`放置在坐标（10,10）。
+        entry_dousha = tkinter.Entry(window_sign_up4, textvariable=dousha, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_dousha.place(x=80, y=70)  # `entry`放置在坐标（150,10）
+        
+        xianrou = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        xianrou.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='鲜肉包(个)：').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
+        entry_xianrou = tkinter.Entry(window_sign_up4, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
+        
+        def f8():
+            wancan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225)
+        btn_comfirm_sign_up4 = tkinter.Button(window_sign_up4, text='确定', command=f8)
+        btn_comfirm_sign_up4.place(x=80, y=180)
+    btnCompute4 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f7)
+    btnCompute4.place(x=270, y=130, width=20, height=20)
+    
+    
+    zaocan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+    zaocan.set(0)  # 将最初显示定为'example@python.com'
+    tkinter.Label(window_sign_up, text='早餐: ').place(x=30, y=50)  # 将`User name:`放置在坐标（10,10）。
+    entry_zaocan = tkinter.Entry(window_sign_up, textvariable=zaocan) 
+    entry_zaocan['state'] = 'readonly'
+    entry_zaocan.place(x=130, y=50)  # `entry`放置在坐标（150,10）.
+    #btnCompute3 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f3)
+    #btnCompute3.place(x=270, y=90, width=20, height=20)
 
-    shuijiao = tkinter.IntVar()  # 将输入的注册名赋值给变量
-    shuijiao.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='水饺: ').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
-    entry_shuijiao = tkinter.Entry(window_sign_up, textvariable=shuijiao)  # 创建一个注册名的`entry`，变量为`new_name`
-    entry_shuijiao.place(x=130, y=130)  # `entry`放置在坐标（150,10）.
+    wucan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+    wucan.set(0)  # 将最初显示定为'example@python.com'
+    tkinter.Label(window_sign_up, text='午餐: ').place(x=30, y=90)  # 将`User name:`放置在坐标（10,10）。
+    entry_wucan = tkinter.Entry(window_sign_up, textvariable=wucan)  # 创建一个注册名的`entry`，变量为`new_name`
+    entry_wucan['state'] = 'readonly'
+    entry_wucan.place(x=130, y=90)  # `entry`放置在坐标（150,10）.
+
+    wancan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+    wancan.set(0)  # 将最初显示定为'example@python.com'
+    tkinter.Label(window_sign_up, text='晚餐: ').place(x=30, y=130)  # 将`User name:`放置在坐标（10,10）。
+    entry_wancan = tkinter.Entry(window_sign_up, textvariable=wancan)  # 创建一个注册名的`entry`，变量为`new_name`
+    entry_wancan['state'] = 'readonly'
+    entry_wancan.place(x=130, y=130)  # `entry`放置在坐标（150,10）.
 
     caluli_need = tkinter.IntVar()
     caluli_need.set(height.get()*30)
@@ -128,7 +254,7 @@ def caluli():
     entry_caluli_need.place(x=130, y=180)
 
     caluli_eat = tkinter.IntVar()
-    caluli_eat.set(mifan.get() * 210+mantou.get()*280+shuijiao.get()*42)
+    caluli_eat.set(zaocan.get() + wucan.get() + wancan.get())
     tkinter.Label(window_sign_up, text='今日摄入卡路里: ').place(x=10, y=220)
     entry_caluli_eat = tkinter.Entry(window_sign_up, textvariable=caluli_eat)
     entry_caluli_eat['state'] = 'readonly'
@@ -155,12 +281,26 @@ def exercise():
         tkinter.Label(window_sign_up, text=score1.get()).place(x=50, y=10)
 
 
-        if(feihuoliang.get()>4800):
+        if(feihuoliang.get()>5040):
             score2.set(100)
-        elif (feihuoliang.get()>3100):
+        elif (feihuoliang.get()>4920):
+            score2.set(95)
+        elif (feihuoliang.get()>4800):
+            score2.set(90)
+        elif (feihuoliang.get()>4550):
+            score2.set(85)
+        elif (feihuoliang.get()>4300):
             score2.set(80)
-        else:
+        elif (feihuoliang.get()>4180):
+            score2.set(78)
+        elif (feihuoliang.get()>3700):
+            score2.set(70)
+        elif (feihuoliang.get()>3100):
             score2.set(60)
+        elif (feihuoliang.get()>2620):
+            score2.set(30)
+        else:
+            score2.set(0)
         tkinter.Label(window_sign_up, text=score2.get()).place(x=50, y=50)
 
 
