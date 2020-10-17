@@ -1,7 +1,8 @@
 import re  # 处理字符串的模块，如查找特定字符，删除特定字符，字符串分割等
 import tkinter  # Tkinter模块("Tk 接口")是Python的标准Tk GUI工具包的接口，位Python的内置模块，直接import tkinter即可使用。
 import tkinter.messagebox  # 调用tkinter模块中的messagebox函数，这个是消息框，对话框的关键，会弹出一个小框
-import pickle
+import tkinter.font as tkfont
+#import pickle
 
 # 按钮操作，点击按钮后需要做的处理
 def buttonClik(btn):
@@ -46,29 +47,32 @@ def buttonClik(btn):
 
 root = tkinter.Tk()  # 生成主窗口，用root表示，后面就在root操作
 # 设置窗口大小和位置
-root.geometry('300x270+400+100')  # 指定主框体大小
+root.geometry('300x400+400+100')  # 指定主框体大小
 # 不允许改变窗口大小
 root.resizable(False, False)  # 框体大小可调性，分别表示x,y方向的可变性；
 # 设置窗口标题
 root.title('计算器')
+root["background"] = 'dimgrey'
 
 # 文本框和按钮都是tkinter中的组件
 # Entry        　　 文本框（单行）；
 # Button        　　按钮；
 # 放置用来显示信息的文本框，设置为只读
 # tkinter.StringVar    能自动刷新的字符串变量，可用set和get方法进行传值和取值
+ft = tkfont.Font(family = '微软雅黑', size = 30, weight = tkfont.NORMAL)
 contentVar = tkinter.StringVar(root, '')
-contentEntry = tkinter.Entry(root, textvariable=contentVar)  # 括号里面，可见第一个都是root,即表示都是以root为主界面的，将文本框中的内容存在contentVar中
+contentEntry = tkinter.Entry(root, textvariable=contentVar, font = ft)  # 括号里面，可见第一个都是root,即表示都是以root为主界面的，将文本框中的内容存在contentVar中
 contentEntry['state'] = 'readonly'  # 文本框只能读，不能写
-contentEntry.place(x=10, y=10, width=280, height=20)  # 文本框在root主界面的xy坐标位置，以及文本框自生的宽和高
+contentEntry.place(x=10, y=10, width=280, height=80)  # 文本框在root主界面的xy坐标位置，以及文本框自生的宽和高
 # x:        　　　 组件左上角的x坐标；
 # y:        　　   组件右上角的y坐标；
 # 放置清除按钮和等号按钮
-btnClear = tkinter.Button(root, text='C', bg='red', command=lambda: buttonClik('C'))  # 在root主界面中放置按钮，按钮上显示C，红色，点击按钮后进入buttonClik回调函数做进一步的处理，注意传入了参数‘C’，这样就能分清是哪个按钮按下了
+ft1 = tkfont.Font(family = '微软雅黑', size = 20, weight = tkfont.NORMAL)
+btnClear = tkinter.Button(root, text='AC', bg='skyblue', font = ft1, command=lambda: buttonClik('C'))  # 在root主界面中放置按钮，按钮上显示C，红色，点击按钮后进入buttonClik回调函数做进一步的处理，注意传入了参数‘C’，这样就能分清是哪个按钮按下了
 # 下面的内容和上面的模式都是一样的
-btnClear.place(x=30, y=40, width=40, height=20)
-btnCompute = tkinter.Button(root, text='=', bg='yellow', command=lambda: buttonClik('='))
-btnCompute.place(x=100, y=40, width=40, height=20)
+btnClear.place(x=10, y=100, width=70, height=50)
+btnCompute = tkinter.Button(root, text='=', bg='skyblue', font = ft1, command=lambda: buttonClik('='))
+btnCompute.place(x=80, y=100, width=70, height=50)
 
 
 def caluli():
@@ -89,15 +93,15 @@ def caluli():
     
     def f3():
         window_sign_up2 = tkinter.Toplevel(window_sign_up)
-        window_sign_up2.geometry('200x250')
+        window_sign_up2.geometry('200x220')
         window_sign_up2.title('早餐')
         
         sb = tkinter.Scrollbar(window_sign_up2)
         sb.pack(side = tkinter.RIGHT, fill = tkinter.Y)
-        lb = tkinter.Listbox(window_sign_up2, height = 8, yscrollcommand = sb.set)
-        lb.pack(side = tkinter.LEFT, fill = tkinter.BOTH)
+       # lb = tkinter.Listbox(window_sign_up2, height = 8, yscrollcommand = sb.set)
+       # lb.pack(side = tkinter.LEFT, fill = tkinter.BOTH)
         
-        for item in[mantou, mifan, shuijiao, dousha, xianrou]:
+
         
         mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
         mantou.set(0)  # 将最初显示定为'example@python.com'
@@ -129,9 +133,28 @@ def caluli():
         entry_xianrou = tkinter.Entry(window_sign_up2, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
         entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
         
+        jiucai = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        jiucai.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='韭菜盒子(个)：').place(x=10, y=110)  # 将`User name:`放置在坐标（10,10）。
+        entry_jiucai = tkinter.Entry(window_sign_up2, textvariable=jiucai, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_jiucai.place(x=80, y=110)  # `entry`放置在坐标（150,10）
+        
+        hanfan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        hanfan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='韩式饭团(个)：').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
+        entry_hanfan = tkinter.Entry(window_sign_up2, textvariable = hanfan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_hanfan.place(x=80, y=130)  # `entry`放置在坐标（150,10）
+        
+        qingtong = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        qingtong.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up2, text='清炒茼蒿(100g)：').place(x=10, y=150)  # 将`User name:`放置在坐标（10,10）。
+        entry_qingtong = tkinter.Entry(window_sign_up2, textvariable = qingtong, width = 7)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_qingtong.place(x=100, y=150)  # `entry`放置在坐标（150,10）
+        
+        
         def f4():
-            zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225) ############要改的部分
-        #zaocan.set(entry_mantou.get())
+            zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225+jiucai.get() * 260 + hanfan.get()* 228 + qingtong.get() * 64) ############要改的部分
+        #zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225+jiucai * 260 + hanfan * 228 + qingtong * 64) 
         btn_comfirm_sign_up2 = tkinter.Button(window_sign_up2, text='确定', command=f4)
         btn_comfirm_sign_up2.place(x=80, y=180)
     btnCompute2 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f3)
@@ -139,8 +162,11 @@ def caluli():
 
     def f5():
         window_sign_up3 = tkinter.Toplevel(window_sign_up)
-        window_sign_up3.geometry('200x250')
+        window_sign_up3.geometry('200x220')
         window_sign_up3.title('午餐')
+        
+        sb = tkinter.Scrollbar(window_sign_up3)
+        sb.pack(side = tkinter.RIGHT, fill = tkinter.Y)
         
         mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
         mantou.set(0)  # 将最初显示定为'example@python.com'
@@ -172,8 +198,27 @@ def caluli():
         entry_xianrou = tkinter.Entry(window_sign_up3, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
         entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
         
+        jiucai = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        jiucai.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='韭菜盒子(个)：').place(x=10, y=110)  # 将`User name:`放置在坐标（10,10）。
+        entry_jiucai = tkinter.Entry(window_sign_up3, textvariable=jiucai, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_jiucai.place(x=80, y=110)  # `entry`放置在坐标（150,10）
+        
+        hanfan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        hanfan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='韩式饭团(个)：').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
+        entry_hanfan = tkinter.Entry(window_sign_up3, textvariable = hanfan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_hanfan.place(x=80, y=130)  # `entry`放置在坐标（150,10）
+        
+        qingtong = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        qingtong.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up3, text='清炒茼蒿(100g)：').place(x=10, y=150)  # 将`User name:`放置在坐标（10,10）。
+        entry_qingtong = tkinter.Entry(window_sign_up3, textvariable = qingtong, width = 7)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_qingtong.place(x=100, y=150)  # `entry`放置在坐标（150,10）
+        
         def f6():
-            wucan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225)
+            wucan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225
+                       +jiucai.get() * 260 + hanfan.get() * 228 + qingtong.get() * 64)
         btn_comfirm_sign_up3 = tkinter.Button(window_sign_up3, text='确定', command=f6)
         btn_comfirm_sign_up3.place(x=80, y=180)
     btnCompute3 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f5)
@@ -182,8 +227,11 @@ def caluli():
 
     def f7():
         window_sign_up4 = tkinter.Toplevel(window_sign_up)
-        window_sign_up4.geometry('200x250')
+        window_sign_up4.geometry('200x220')
         window_sign_up4.title('晚餐')
+        
+        sb = tkinter.Scrollbar(window_sign_up4)
+        sb.pack(side = tkinter.RIGHT, fill = tkinter.Y)
         
         mantou = tkinter.IntVar()  # 将输入的注册名赋值给变量
         mantou.set(0)  # 将最初显示定为'example@python.com'
@@ -215,8 +263,27 @@ def caluli():
         entry_xianrou = tkinter.Entry(window_sign_up4, textvariable=xianrou, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
         entry_xianrou.place(x=80, y=90)  # `entry`放置在坐标（150,10）
         
+        jiucai = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        jiucai.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='韭菜盒子(个)：').place(x=10, y=110)  # 将`User name:`放置在坐标（10,10）。
+        entry_jiucai = tkinter.Entry(window_sign_up4, textvariable=jiucai, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_jiucai.place(x=80, y=110)  # `entry`放置在坐标（150,10）
+        
+        hanfan = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        hanfan.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='韩式饭团(个)：').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
+        entry_hanfan = tkinter.Entry(window_sign_up4, textvariable = hanfan, width = 10)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_hanfan.place(x=80, y=130)  # `entry`放置在坐标（150,10）
+        
+        qingtong = tkinter.IntVar()  # 将输入的注册名赋值给变量
+        qingtong.set(0)  # 将最初显示定为'example@python.com'
+        tkinter.Label(window_sign_up4, text='清炒茼蒿(100g)：').place(x=10, y=150)  # 将`User name:`放置在坐标（10,10）。
+        entry_qingtong = tkinter.Entry(window_sign_up4, textvariable = qingtong, width = 7)  # 创建一个注册名的`entry`，变量为`new_name`
+        entry_qingtong.place(x=100, y=150)  # `entry`放置在坐标（150,10）
+        
         def f8():
-            wancan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225)
+            wancan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225
+                        +jiucai.get() * 260 + hanfan.get() * 228 + qingtong.get() * 64) 
         btn_comfirm_sign_up4 = tkinter.Button(window_sign_up4, text='确定', command=f8)
         btn_comfirm_sign_up4.place(x=80, y=180)
     btnCompute4 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f7)
@@ -263,9 +330,10 @@ def caluli():
     btn_comfirm_sign_up = tkinter.Button(window_sign_up, text='计算', command=f1)
     btn_comfirm_sign_up.place(x=180, y=260)
 
-
-btnCompute = tkinter.Button(root, text='卡路里', bg='pink', command=caluli)
-btnCompute.place(x=170, y=40, width=40, height=20)
+ft2 = tkfont.Font(family = '幼圆', size = 15, weight = tkfont.NORMAL)
+ft3 = tkfont.Font(family = '微软雅黑', size = 18, weight = tkfont.NORMAL)
+btnCompute = tkinter.Button(root, text='卡路里', bg='paleturquoise',font = ft2, command=caluli)
+btnCompute.place(x=150, y=100, width=70, height=50)
 
 
 def exercise():
@@ -293,59 +361,251 @@ def exercise():
             score2.set(80)
         elif (feihuoliang.get()>4180):
             score2.set(78)
+        elif (feihuoliang.get()>4060):
+            score2.set(76)
+        elif (feihuoliang.get()>3940):
+            score2.set(74)
+        elif (feihuoliang.get()>3820):
+            score2.set(72)
         elif (feihuoliang.get()>3700):
             score2.set(70)
+        elif (feihuoliang.get()>3580):
+            score2.set(68)
+        elif (feihuoliang.get()>3460):
+            score2.set(66)
+        elif (feihuoliang.get()>3340):
+            score2.set(64)
+        elif (feihuoliang.get()>3220):
+            score2.set(62)
         elif (feihuoliang.get()>3100):
             score2.set(60)
+        elif (feihuoliang.get()>2940):
+            score2.set(50)
+        elif (feihuoliang.get()>2780):
+            score2.set(40)
         elif (feihuoliang.get()>2620):
             score2.set(30)
+        elif (feihuoliang.get()>2460):
+            score2.set(20)
+        elif (feihuoliang.get()>2300):
+            score2.set(10)
         else:
             score2.set(0)
         tkinter.Label(window_sign_up, text=score2.get()).place(x=50, y=50)
 
 
-        if (wushi.get() <6.9):
+        if (wushi.get() <6.7):
             score3.set(100)
+        elif (wushi.get() <6.8):
+            score3.set(95)
+        elif (wushi.get() <6.9):
+            score3.set(90)
+        elif (wushi.get() <7.0):
+            score3.set(85)
         elif (wushi.get() <7.1):
             score3.set(80)
-        else:
+        elif (wushi.get() <7.3):
+            score3.set(78)
+        elif (wushi.get() <7.5):
+            score3.set(76)
+        elif (wushi.get() <7.7):
+            score3.set(74)
+        elif (wushi.get() <7.9):
+            score3.set(72)
+        elif (wushi.get() <8.1):
+            score3.set(70)
+        elif (wushi.get() <8.3):
+            score3.set(68)
+        elif (wushi.get() <8.5):
+            score3.set(66)
+        elif (wushi.get() <8.7):
+            score3.set(64)
+        elif (wushi.get() <8.9):
+            score3.set(62)
+        elif (wushi.get() <9.1):
             score3.set(60)
+        elif (wushi.get() <9.3):
+            score3.set(50)
+        elif (wushi.get() <9.5):
+            score3.set(40)
+        elif (wushi.get() <9.7):
+            score3.set(30)
+        elif (wushi.get() <9.9):
+            score3.set(20)
+        elif (wushi.get() <10.1):
+            score3.set(10)
+        else:
+            score3.set(0)
         tkinter.Label(window_sign_up, text=score3.get()).place(x=50, y=90)
 
 
-        if (tiqianqu.get() >21.3):
+        if (tiqianqu.get() >24.9):
             score4.set(100)
-        elif (tiqianqu.get() >3.7):
+        elif (tiqianqu.get() >23.1):
+            score4.set(95)
+        elif (tiqianqu.get() >21.3):
+            score4.set(90)
+        elif (tiqianqu.get() >19.5):
+            score4.set(85)
+        elif (tiqianqu.get() >17.7):
             score4.set(80)
-        else:
+        elif (tiqianqu.get() >16.3):
+            score4.set(78)
+        elif (tiqianqu.get() >14.9):
+            score4.set(76)
+        elif (tiqianqu.get() >13.5):
+            score4.set(74)
+        elif (tiqianqu.get() >12.1):
+            score4.set(72)
+        elif (tiqianqu.get() >10.7):
+            score4.set(70)
+        elif (tiqianqu.get() >9.3):
+            score4.set(68)
+        elif (tiqianqu.get() >7.9):
+            score4.set(66)
+        elif (tiqianqu.get() >6.5):
+            score4.set(64)
+        elif (tiqianqu.get() >5.1):
+            score4.set(62)
+        elif (tiqianqu.get() >3.7):
             score4.set(60)
+        elif (tiqianqu.get() >2.7):
+            score4.set(50)
+        elif (tiqianqu.get() >1.7):
+            score4.set(40)
+        elif (tiqianqu.get() >0.7):
+            score4.set(30)
+        elif (tiqianqu.get() >-0.3):
+            score4.set(20)
+        elif (tiqianqu.get() >-1.3):
+            score4.set(10)
+        else:
+            score4.set(0)
         tkinter.Label(window_sign_up, text=score4.get()).place(x=50, y=130)
 
 
-        if (tiaoyuan.get() >263):
+        if (tiaoyuan.get() >273):
             score5.set(100)
-        elif (tiaoyuan.get() >208):
+        if (tiaoyuan.get() >268):
+            score5.set(95)
+        elif (tiaoyuan.get() >263):
+            score5.set(90)
+        elif (tiaoyuan.get() >256):
+            score5.set(85)
+        elif (tiaoyuan.get() >248):
             score5.set(80)
-        else:
+        elif (tiaoyuan.get() >244):
+            score5.set(78)
+        elif (tiaoyuan.get() >240):
+            score5.set(76)
+        elif (tiaoyuan.get() >236):
+            score5.set(74)
+        elif (tiaoyuan.get() >232):
+            score5.set(72)
+        elif (tiaoyuan.get() >230):
+            score5.set(70)
+        elif (tiaoyuan.get() >224):
+            score5.set(68)
+        elif (tiaoyuan.get() >220):
+            score5.set(66)
+        elif (tiaoyuan.get() >216):
+            score5.set(64)
+        elif (tiaoyuan.get() >212):
+            score5.set(62)
+        elif (tiaoyuan.get() >208):
             score5.set(60)
+        elif (tiaoyuan.get() >203):
+            score5.set(50)
+        elif (tiaoyuan.get() >198):
+            score5.set(40)
+        elif (tiaoyuan.get() >193):
+            score5.set(30)
+        elif (tiaoyuan.get() >188):
+            score5.set(20)
+        elif (tiaoyuan.get() >183):
+            score5.set(10)
+        else:
+            score5.set(0)
         tkinter.Label(window_sign_up, text=score5.get()).place(x=50, y=170)
 
 
-        if (yinti.get() >263):
+        if (yinti.get() >19):
             score6.set(100)
-        elif (yinti.get() >208):
+        elif (yinti.get() >18):
+            score6.set(95)
+        elif (yinti.get() >17):
+            score6.set(16)
+        elif (yinti.get() >16):
+            score6.set(85)
+        elif (yinti.get() >15):
             score6.set(80)
-        else:
+        elif (yinti.get() >14):
+            score6.set(76)
+        elif (yinti.get() >13):
+            score6.set(72)
+        elif (yinti.get() >12):
+            score6.set(68)
+        elif (yinti.get() >11):
+            score6.set(64)
+        elif (yinti.get() >10):
             score6.set(60)
+        elif (yinti.get() >9):
+            score6.set(50)
+        elif (yinti.get() >8):
+            score6.set(40)
+        elif (yinti.get() >7):
+            score6.set(30)
+        elif (yinti.get() >6):
+            score6.set(20)
+        elif (yinti.get() >5):
+            score6.set(10)
+        else:
+            score6.set(0)
         tkinter.Label(window_sign_up, text=score6.get()).place(x=50, y=210)
 
 
-        if (naili.get() <207):
+        if (naili.get() <197):
             score7.set(100)
-        elif (naili.get() <272):
+        elif (naili.get() <202):
+            score7.set(95)
+        elif (naili.get() <207):
+            score7.set(90)
+        elif (naili.get() <214):
+            score7.set(85)
+        elif (naili.get() <222):
             score7.set(80)
-        else:
+        elif (naili.get() <227):
+            score7.set(78)
+        elif (naili.get() <232):
+            score7.set(76)
+        elif (naili.get() <237):
+            score7.set(74)
+        elif (naili.get() <242):
+            score7.set(72)
+        elif (naili.get() <247):
+            score7.set(70)
+        elif (naili.get() <252):
+            score7.set(68)
+        elif (naili.get() <257):
+            score7.set(66)
+        elif (naili.get() <262):
+            score7.set(64)
+        elif (naili.get() <267):
+            score7.set(62)
+        elif (naili.get() <272):
             score7.set(60)
+        elif (naili.get() <292):
+            score7.set(50)
+        elif (naili.get() <312):
+            score7.set(40)
+        elif (naili.get() <332):
+            score7.set(30)
+        elif (naili.get() <352):
+            score7.set(20)
+        elif (naili.get() <372):
+            score7.set(10)
+        else:
+            score7.set(0)
         tkinter.Label(window_sign_up, text=score7.get()).place(x=50, y=250)
         zongfen.set(score1.get() * 0.15 + score2.get() * 0.15 + score3.get() * 0.2 + score4.get() * 0.1 + score5.get() * 0.1 + score6.get() * 0.1 + score7.get() * 0.2)
 
@@ -434,28 +694,27 @@ def exercise():
     btn_comfirm_sign_up.place(x=180, y=330)
 
 
-btnCompute2 = tkinter.Button(root, text='体测', bg='pink', command=exercise)
-btnCompute2.place(x=240, y=40, width=40, height=20)
+btnCompute2 = tkinter.Button(root, text='体测', bg='paleturquoise',font = ft2, command=exercise)
+btnCompute2.place(x=220, y=100, width=70, height=50)
 
 
 
 # 放置10个数字、小数点和计算平方根的按钮
-digits = list('0123456789.') + ['Sqrt']  # 序列list是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。
+digits = list('789456123.0') + ['Sqrt']  # 序列list是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。
 index = 0
 # 用循环的方式将上面数字、小数点、平方根这12个按钮分成四行三列进行放置
 for row in range(4):
     for col in range(3):
         d = digits[index]  # 按索引从list中取值，和c语言中的数组类似
         index += 1  # 索引号递增
-        btnDigit = tkinter.Button(root, text=d, command=lambda x=d: buttonClik(x))  # 和上面的是类似的
-        btnDigit.place(x=20 + col * 70, y=80 + row * 50, width=50, height=20)  # 很显然，每次放一个按钮的位置是不一样的，但是它们之间的关系时确定的
+        btnDigit = tkinter.Button(root, text=d, bg = 'azure',font = ft3, command=lambda x=d: buttonClik(x))  # 和上面的是类似的
+        btnDigit.place(x=10 + col * 70, y=155 + row * 60, width=70, height=60)  # 很显然，每次放一个按钮的位置是不一样的，但是它们之间的关系时确定的
 # 放置运算符按钮
 operators = ('+', '-', '*', '/', '**', '//')  # Python的元组与列表类似，不同之处在于元组的元素不能修改。
 # 元组使用小括号，列表使用方括号。
 # enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。
 for index, operator in enumerate(operators):
-    btnOperator = tkinter.Button(root, text=operator, bg='orange',
-                                 command=lambda x=operator: buttonClik(x))  # 创建的过程和上面类似
-    btnOperator.place(x=230, y=80 + index * 30, width=50, height=20)
+    btnOperator = tkinter.Button(root, text=operator, bg='lightcyan', font = ft2, command=lambda x=operator: buttonClik(x))  # 创建的过程和上面类似
+    btnOperator.place(x=220, y=155 + index * 40, width=70, height=40)
 
 root.mainloop()  # 进入消息循环（必需组件）
