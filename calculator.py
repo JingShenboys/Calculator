@@ -26,7 +26,7 @@ def buttonClik(btn):
     elif btn == '=':
         try:
             # 对输入的表达式求值
-            content = str(eval(content))  # 调用函数eval，用字符串计算出结果
+            content = str(round(eval(content), 10))  # 调用函数eval，用字符串计算出结果
         except:
             tkinter.messagebox.showerror('错误', '表达式有误')
             return
@@ -154,6 +154,7 @@ def caluli():
         
         def f4():
             zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225+jiucai.get() * 260 + hanfan.get()* 228 + qingtong.get() * 64) ############要改的部分
+            window_sign_up2.destroy()
         #zaocan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225+jiucai * 260 + hanfan * 228 + qingtong * 64) 
         btn_comfirm_sign_up2 = tkinter.Button(window_sign_up2, text='确定', command=f4)
         btn_comfirm_sign_up2.place(x=80, y=180)
@@ -219,6 +220,7 @@ def caluli():
         def f6():
             wucan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225
                        +jiucai.get() * 260 + hanfan.get() * 228 + qingtong.get() * 64)
+            window_sign_up3.destroy()
         btn_comfirm_sign_up3 = tkinter.Button(window_sign_up3, text='确定', command=f6)
         btn_comfirm_sign_up3.place(x=80, y=180)
     btnCompute3 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f5)
@@ -283,8 +285,9 @@ def caluli():
         
         def f8():
             wancan.set(mantou.get()*280+ mifan.get()*140 + shuijiao.get()*42 + dousha.get()*215+xianrou.get()*225
-                        +jiucai.get() * 260 + hanfan.get() * 228 + qingtong.get() * 64) 
-        btn_comfirm_sign_up4 = tkinter.Button(window_sign_up4, text='确定', command=f8)
+                        +jiucai.get() * 260 + hanfan.get() * 228 + qingtong.get() * 64)
+            window_sign_up4.destroy()
+        btn_comfirm_sign_up4 = tkinter.Button(window_sign_up4, text='确定', command = f8)
         btn_comfirm_sign_up4.place(x=80, y=180)
     btnCompute4 = tkinter.Button(window_sign_up, text='▼', bg='white', command=f7)
     btnCompute4.place(x=270, y=130, width=20, height=20)
@@ -340,13 +343,16 @@ def exercise():
     def f2():
 
 
+        #if (height.get() > 24 | height.get() < 13):
+         #   tkinter.messagebox.showerror('错误', '不允许存在连续运算符')
+          #  return
         if ((height.get() > 17.9) & (height.get() < 23.9)):
             score1.set(100)
-        elif ((height.get() < 17.9) | ((height.get() < 27.9) & (height.get() > 24))):
+        elif (((height.get() < 17.9) & ( height.get() > 10.0)) | ((height.get() < 27.9) & (height.get() > 24))):
             score1.set(80)
         else:
             score1.set(60)
-        tkinter.Label(window_sign_up, text=score1.get()).place(x=50, y=10)
+        tkinter.Label(window_sign_up, text=score1.get()).place(x=300, y=10)
 
 
         if(feihuoliang.get()>5040):
@@ -391,10 +397,11 @@ def exercise():
             score2.set(10)
         else:
             score2.set(0)
-        tkinter.Label(window_sign_up, text=score2.get()).place(x=50, y=50)
+        tkinter.Label(window_sign_up, text=score2.get()).place(x=300, y=50)
 
-
-        if (wushi.get() <6.7):
+        if (wushi.get() < 5.5):
+            score3.set(0)
+        elif (wushi.get() <6.7):
             score3.set(100)
         elif (wushi.get() <6.8):
             score3.set(95)
@@ -436,7 +443,7 @@ def exercise():
             score3.set(10)
         else:
             score3.set(0)
-        tkinter.Label(window_sign_up, text=score3.get()).place(x=50, y=90)
+        tkinter.Label(window_sign_up, text=score3.get()).place(x=300, y=90)
 
 
         if (tiqianqu.get() >24.9):
@@ -479,9 +486,9 @@ def exercise():
             score4.set(20)
         elif (tiqianqu.get() >-1.3):
             score4.set(10)
-        else:
+        elif (tiqianqu.get() <= -1.3):
             score4.set(0)
-        tkinter.Label(window_sign_up, text=score4.get()).place(x=50, y=130)
+        tkinter.Label(window_sign_up, text=score4.get()).place(x=300, y=130)
 
 
         if (tiaoyuan.get() >273):
@@ -524,9 +531,9 @@ def exercise():
             score5.set(20)
         elif (tiaoyuan.get() >183):
             score5.set(10)
-        else:
+        elif (tiaoyuan.get() > 0):
             score5.set(0)
-        tkinter.Label(window_sign_up, text=score5.get()).place(x=50, y=170)
+        tkinter.Label(window_sign_up, text=score5.get()).place(x=300, y=170)
 
 
         if (yinti.get() >19):
@@ -561,10 +568,11 @@ def exercise():
             score6.set(10)
         else:
             score6.set(0)
-        tkinter.Label(window_sign_up, text=score6.get()).place(x=50, y=210)
+        tkinter.Label(window_sign_up, text=score6.get()).place(x=300, y=210)
 
-
-        if (naili.get() <197):
+        if (naili.get() < 150):
+            score7.set(0)
+        elif (naili.get() <197):
             score7.set(100)
         elif (naili.get() <202):
             score7.set(95)
@@ -606,7 +614,7 @@ def exercise():
             score7.set(10)
         else:
             score7.set(0)
-        tkinter.Label(window_sign_up, text=score7.get()).place(x=50, y=250)
+        tkinter.Label(window_sign_up, text=score7.get()).place(x=300, y=250)
         zongfen.set(score1.get() * 0.15 + score2.get() * 0.15 + score3.get() * 0.2 + score4.get() * 0.1 + score5.get() * 0.1 + score6.get() * 0.1 + score7.get() * 0.2)
 
     # 定义长在窗口上的窗口
@@ -627,7 +635,7 @@ def exercise():
 
     feihuoliang = tkinter.IntVar()  # 将输入的注册名赋值给变量
     feihuoliang.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='肺活量 ').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='肺活量(ml):').place(x=10, y=50)  # 将`User name:`放置在坐标（10,10）。
     entry_feihuoliang = tkinter.Entry(window_sign_up, textvariable=feihuoliang)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_feihuoliang.place(x=130, y=50)  # `entry`放置在坐标（150,10）.
     score2=tkinter.DoubleVar()
@@ -636,7 +644,7 @@ def exercise():
 
     wushi = tkinter.DoubleVar()  # 将输入的注册名赋值给变量
     wushi.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='50米: ').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='50米(s):').place(x=10, y=90)  # 将`User name:`放置在坐标（10,10）。
     entry_wushi = tkinter.Entry(window_sign_up, textvariable=wushi)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_wushi.place(x=130, y=90)  # `entry`放置在坐标（150,10）.
     score3 = tkinter.DoubleVar()
@@ -644,7 +652,7 @@ def exercise():
 
     tiqianqu = tkinter.DoubleVar()  # 将输入的注册名赋值给变量
     tiqianqu.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='体前屈: ').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='体前屈(cm): ').place(x=10, y=130)  # 将`User name:`放置在坐标（10,10）。
     entry_tiqianqu = tkinter.Entry(window_sign_up, textvariable=tiqianqu)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_tiqianqu.place(x=130, y=130)  # `entry`放置在坐标（150,10）.
     score4 = tkinter.DoubleVar()
@@ -652,7 +660,7 @@ def exercise():
 
     tiaoyuan = tkinter.DoubleVar()  # 将输入的注册名赋值给变量
     tiaoyuan.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='跳远: ').place(x=10, y=170)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='立定跳远(cm): ').place(x=10, y=170)  # 将`User name:`放置在坐标（10,10）。
     entry_tiaoyuan = tkinter.Entry(window_sign_up, textvariable=tiaoyuan)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_tiaoyuan.place(x=130, y=170)  # `entry`放置在坐标（150,10）.
     score5 = tkinter.DoubleVar()
@@ -660,7 +668,7 @@ def exercise():
 
     yinti = tkinter.DoubleVar()  # 将输入的注册名赋值给变量
     yinti.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='引体: ').place(x=10, y=210)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='引体(个): ').place(x=10, y=210)  # 将`User name:`放置在坐标（10,10）。
     entry_yinti = tkinter.Entry(window_sign_up, textvariable=yinti)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_yinti.place(x=130, y=210)  # `entry`放置在坐标（150,10）.
     score6 = tkinter.DoubleVar()
@@ -669,7 +677,7 @@ def exercise():
 
     naili = tkinter.DoubleVar()  # 将输入的注册名赋值给变量
     naili.set(0)  # 将最初显示定为'example@python.com'
-    tkinter.Label(window_sign_up, text='耐力跑: ').place(x=10, y=250)  # 将`User name:`放置在坐标（10,10）。
+    tkinter.Label(window_sign_up, text='耐力跑(s): ').place(x=10, y=250)  # 将`User name:`放置在坐标（10,10）。
     entry_naili = tkinter.Entry(window_sign_up, textvariable=naili)  # 创建一个注册名的`entry`，变量为`new_name`
     entry_naili.place(x=130, y=250)  # `entry`放置在坐标（150,10）.
     score7 = tkinter.DoubleVar()
@@ -698,7 +706,6 @@ btnCompute2 = tkinter.Button(root, text='体测', bg='paleturquoise',font = ft2,
 btnCompute2.place(x=220, y=100, width=70, height=50)
 
 
-
 # 放置10个数字、小数点和计算平方根的按钮
 digits = list('789456123.0') + ['Sqrt']  # 序列list是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。
 index = 0
@@ -710,11 +717,13 @@ for row in range(4):
         btnDigit = tkinter.Button(root, text=d, bg = 'azure',font = ft3, command=lambda x=d: buttonClik(x))  # 和上面的是类似的
         btnDigit.place(x=10 + col * 70, y=155 + row * 60, width=70, height=60)  # 很显然，每次放一个按钮的位置是不一样的，但是它们之间的关系时确定的
 # 放置运算符按钮
-operators = ('+', '-', '*', '/', '**', '//')  # Python的元组与列表类似，不同之处在于元组的元素不能修改。
+operators = ('+', '-', '*', '/', '^', '//')  # Python的元组与列表类似，不同之处在于元组的元素不能修改。
 # 元组使用小括号，列表使用方括号。
 # enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。
 for index, operator in enumerate(operators):
     btnOperator = tkinter.Button(root, text=operator, bg='lightcyan', font = ft2, command=lambda x=operator: buttonClik(x))  # 创建的过程和上面类似
     btnOperator.place(x=220, y=155 + index * 40, width=70, height=40)
+    
+    
 
 root.mainloop()  # 进入消息循环（必需组件）
